@@ -9,8 +9,8 @@ const OptionGroup = (props) => {
   const [lastItemMenuCounter, setLastItemMenuCounter] = useState(null);
 
   const handleCompatibility = (value, menuCounter) => {
-    // if under same menu/group, the not compatible menu must reset
-    // else the not compatible menu will keep on adding record
+    // If under same menu/group, the not compatible menu must reset
+    // else the not compatible menu will keep on adding record.
     if (lastItemMenuCounter === menuCounter) {
       if (rules[value]) {
         setNotCompatibleMenu(rules[value]);
@@ -23,27 +23,12 @@ const OptionGroup = (props) => {
     }
   };
 
-  // check if the the items is in the first menu/group
-  const checkFirstGroup = (isFirstTime, menuCounter) => {
-    return isFirstTime && menuCounter === 0;
-  };
-
-  // check if the item exists on the not compatible menu, the radio button will be disabled
-  const checkCompatibility = (menuCounter, itemId, isFirstTime) => {
-    let validateFirstGroup = checkFirstGroup(isFirstTime, menuCounter);
-
-    if (validateFirstGroup) {
-      if (validateFirstGroup === true) {
-        return true;
-      } else {
-        return false;
-      }
+  // Check if the item exists on the not compatible menu, the radio button will be disabled.
+  const checkCompatibility = (menuCounter, itemId) => {
+    if (menuCounter === 0 || !notCompatibleMenu.includes(parseInt(itemId))) {
+      return true;
     } else {
-      if (menuCounter === 0 || !notCompatibleMenu.includes(parseInt(itemId))) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     }
   };
 
